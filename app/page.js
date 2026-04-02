@@ -77,7 +77,7 @@ const SITE = {
     notionJournalNav:
       "https://www.notion.so/Life-Updates-282f015c3eff80d8afb4deca50207656",
     notionJournalLatest:
-      "https://www.notion.so/February-1-2026-311f015c3eff801d9ffcc60186ecb40d",
+      "https://www.notion.so/April-1-2026-336f015c3eff8038b917f9421d97bc0a",
   },
   ggr: {
     spotify: "https://open.spotify.com/show/6NZO8HHBoBON5xIXZs9xMm",
