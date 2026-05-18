@@ -92,9 +92,9 @@ const SITE = {
     apple: "https://podcasts.apple.com/us/podcast/gals-getting-rich/id1629224294",
   },
   stats: {
-    physical: "8,250",
-    social: "6",
-    mental: "88",
+    physical: "7,094",
+    social: "3",
+    mental: "70",
   },
   consuming: [
     {
@@ -404,10 +404,11 @@ export default function Page() {
         title="The Bookshelf"
         subtitle="Good inputs lead to good outputs. Here is what is currently feeding my brain."
       >
-        <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-8">
+        <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-8 items-stretch">
           {SITE.consuming.map((item, idx) => (
             <motion.div
               key={idx}
+              className="h-full"
               initial={{ opacity: 0, y: 15 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
@@ -417,17 +418,17 @@ export default function Page() {
                 href={item.url || "#"}
                 target="_blank"
                 rel="noreferrer"
-                className="block group"
+                className="block group h-full"
               >
-                <div className="bg-white rounded-3xl overflow-hidden shadow-sm border border-[#E8E1D5] group-hover:shadow-xl transition-all duration-300 group-hover:-translate-y-2">
-                  <div className="h-48 bg-[#F3EFE7] relative overflow-hidden flex items-center justify-center p-4">
+                <div className="bg-white rounded-3xl overflow-hidden shadow-sm border border-[#E8E1D5] group-hover:shadow-xl transition-all duration-300 group-hover:-translate-y-2 h-full flex flex-col">
+                  <div className="relative aspect-[3/4] w-full shrink-0 overflow-hidden bg-[#F3EFE7]">
                     {item.image ? (
                       <Image
                         src={item.image}
                         alt={item.title}
                         fill
-                        className="object-cover group-hover:scale-105 transition-transform duration-700"
-                        sizes="(max-width: 768px) 100vw, 33vw"
+                        className="object-cover object-center group-hover:scale-105 transition-transform duration-700"
+                        sizes="(max-width: 768px) 50vw, 25vw"
                       />
                     ) : (
                       <BookOpen size={40} className="text-[#1E3A44] opacity-20" />
@@ -436,11 +437,11 @@ export default function Page() {
                       {item.type}
                     </div>
                   </div>
-                  <div className="p-6 bg-white">
-                    <h4 className="font-serif text-xl text-[#1E3A44] mb-2 leading-snug group-hover:text-[#E87A5D] transition-colors line-clamp-2">
+                  <div className="p-6 bg-white flex-1 flex flex-col">
+                    <h4 className="font-serif text-xl text-[#1E3A44] mb-2 leading-snug group-hover:text-[#E87A5D] transition-colors line-clamp-2 min-h-[3.5rem]">
                       {item.title}
                     </h4>
-                    <span className="text-sm text-[#5A6D74] font-medium block">
+                    <span className="text-sm text-[#5A6D74] font-medium block mt-auto">
                       by {item.author}
                     </span>
                   </div>
