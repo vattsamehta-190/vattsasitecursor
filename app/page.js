@@ -99,12 +99,11 @@ const SITE = {
   consuming: [
     {
       type: "Reading",
-      title: "We Are All Guilty",
-      author: "Karin Slaughter",
+      title: "Super Nintendo",
+      author: "Keza MacDonald",
       isPodcast: false,
-      url: "https://www.goodreads.com/search?q=We+Are+All+Guilty+Karin+Slaughter",
-      image:
-        "https://images.unsplash.com/photo-1544947950-fa07a98d237f?q=80&w=400&auto=format&fit=crop",
+      url: "https://www.goodreads.com/search?q=Super+Nintendo+Keza+MacDonald",
+      image: "/super-nintendo.png",
     },
     {
       type: "Reading",
@@ -112,8 +111,7 @@ const SITE = {
       author: "Hanif Abdurraqib",
       isPodcast: false,
       url: "https://www.goodreads.com/book/show/33947154-they-can-t-kill-us-until-they-kill-us?ref=nav_sb_ss_1_17",
-      image:
-        "https://images.unsplash.com/photo-1589829085413-56de8ae18c73?q=80&w=400&auto=format&fit=crop",
+      image: "/they-cant-kill-us.png",
     },
     {
       type: "Listening to",
@@ -121,8 +119,15 @@ const SITE = {
       author: "Stephen J. Dubner",
       isPodcast: true,
       url: "https://freakonomics.com/series/freakonomics-radio/",
-      image:
-        "https://images.unsplash.com/photo-1478737270239-2f02b77fc618?q=80&w=400&auto=format&fit=crop",
+      image: "/freakonomics.png",
+    },
+    {
+      type: "Listening to",
+      title: "Right Answers Mostly",
+      author: "Tess & Claire",
+      isPodcast: true,
+      url: "https://podcasts.apple.com/us/podcast/right-answers-mostly/id1580439220",
+      image: "/right-answers-mostly.png",
     },
   ],
   stack: ["Notion", "Claude", "Gemini", "DJI Osmo 2"],
@@ -399,7 +404,7 @@ export default function Page() {
         title="The Bookshelf"
         subtitle="Good inputs lead to good outputs. Here is what is currently feeding my brain."
       >
-        <div className="grid md:grid-cols-3 gap-8">
+        <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-8">
           {SITE.consuming.map((item, idx) => (
             <motion.div
               key={idx}
