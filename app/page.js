@@ -12,6 +12,7 @@ import {
   Sparkles,
   BookOpen,
   Play,
+  CircleHelp,
 } from "lucide-react";
 
 const Button = React.forwardRef(function Button(
@@ -378,7 +379,22 @@ export default function Page() {
             transition={{ delay: 0.2 }}
           >
             <Card className="bg-[#F2EBE0] text-[#1E3A44] h-full">
-              <CardContent className="flex flex-col justify-between h-full">
+              <CardContent className="relative flex flex-col justify-between h-full">
+                <div className="absolute top-8 right-8 z-10 group">
+                  <button
+                    type="button"
+                    className="rounded-full p-1 text-[#1E3A44]/45 hover:text-[#1E3A44] hover:bg-[#1E3A44]/5 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#E87A5D]"
+                    aria-label="Mental health score formula"
+                  >
+                    <CircleHelp size={17} strokeWidth={2} />
+                  </button>
+                  <div
+                    role="tooltip"
+                    className="absolute right-0 top-full mt-2 w-56 rounded-xl border border-[#E8E1D5] bg-white/95 px-3 py-2.5 text-xs font-medium leading-snug text-[#1E3A44] shadow-lg opacity-0 invisible translate-y-1 transition-all duration-200 pointer-events-none group-hover:opacity-100 group-hover:visible group-hover:translate-y-0 group-focus-within:opacity-100 group-focus-within:visible group-focus-within:translate-y-0"
+                  >
+                    The Formula = Mood + Stress + Energy + Sleep + Routine
+                  </div>
+                </div>
                 <span className="text-xs font-bold tracking-widest uppercase opacity-70 mb-8 block">
                   Mental Health
                 </span>
