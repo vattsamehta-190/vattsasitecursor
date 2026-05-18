@@ -305,14 +305,14 @@ export default function Page() {
               </div>
 
               <div className="hidden md:flex justify-center">
-                <div className="w-64 h-64 bg-[#E87A5D] rounded-2xl shadow-2xl rotate-6 hover:rotate-0 transition-transform duration-500 border-8 border-white/10 flex items-center justify-center p-6 text-center">
-                  <span className="font-serif text-3xl font-bold leading-tight">
-                    GALS
-                    <br />
-                    GETTING
-                    <br />
-                    RICH.
-                  </span>
+                <div className="relative w-64 h-64 rounded-2xl shadow-2xl rotate-6 hover:rotate-0 transition-transform duration-500 border-8 border-white/10 overflow-hidden">
+                  <Image
+                    src="/gals-getting-rich.png"
+                    alt="Gals Getting Rich podcast cover"
+                    fill
+                    className="object-cover"
+                    sizes="256px"
+                  />
                 </div>
               </div>
             </div>
