@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useMemo } from "react";
+import React from "react";
 import Image from "next/image";
 import { motion } from "framer-motion";
 import {
@@ -18,7 +18,6 @@ const Button = React.forwardRef(function Button(
   { className = "", variant = "default", asChild = false, children, ...props },
   ref
 ) {
-  const Comp = asChild ? "div" : "button";
   const baseStyle =
     "inline-flex items-center justify-center rounded-full text-sm font-bold tracking-wide transition-all focus-visible:outline-none focus-visible:ring-2 disabled:pointer-events-none disabled:opacity-50";
   const variants = {
@@ -26,20 +25,30 @@ const Button = React.forwardRef(function Button(
       "bg-[#E87A5D] text-white shadow hover:bg-[#D56A4D] hover:-translate-y-0.5",
     outline:
       "border-2 border-[#1E3A44] bg-transparent text-[#1E3A44] shadow-sm hover:bg-[#1E3A44] hover:text-white",
+    outlineOnDark:
+      "border-2 border-white bg-transparent text-white shadow-sm hover:bg-white hover:text-[#1E3A44]",
     ghost: "hover:bg-[#F3EFE7] text-[#1E3A44]",
     secondary:
       "bg-[#1E3A44] text-white hover:bg-[#142A32] shadow-md hover:-translate-y-0.5",
     white:
       "bg-white text-[#1E3A44] hover:bg-gray-100 shadow-md hover:-translate-y-0.5",
   };
+  const mergedClassName = `${baseStyle} ${variants[variant]} ${className}`;
+
+  if (asChild && React.isValidElement(children)) {
+    return React.cloneElement(children, {
+      ref,
+      className: [mergedClassName, children.props.className]
+        .filter(Boolean)
+        .join(" "),
+      ...props,
+    });
+  }
+
   return (
-    <Comp
-      ref={ref}
-      className={`${baseStyle} ${variants[variant]} ${className}`}
-      {...props}
-    >
+    <button ref={ref} className={mergedClassName} {...props}>
       {children}
-    </Comp>
+    </button>
   );
 });
 
@@ -69,7 +78,6 @@ const SITE = {
   name: "Vattsa",
   tagline: "Consultant • Creator • Podcast Host",
   currentLocation: "Manhattan, New York",
-  lastUpdatedISO: "2026-02-24T12:00:00Z",
   email: "VattsaMehta@gmail.com",
   socials: {
     instagram: "https://www.instagram.com/thevattsanator/?hl=en",
@@ -77,7 +85,7 @@ const SITE = {
     notionJournalNav:
       "https://www.notion.so/Life-Updates-282f015c3eff80d8afb4deca50207656",
     notionJournalLatest:
-      "https://www.notion.so/April-1-2026-336f015c3eff8038b917f9421d97bc0a",
+      "https://aquatic-production-e6b.notion.site/May-1-2026-354f015c3eff8055b8aadaffda042a04?pvs=74",
   },
   ggr: {
     spotify: "https://open.spotify.com/show/6NZO8HHBoBON5xIXZs9xMm",
@@ -120,15 +128,6 @@ const SITE = {
   stack: ["Notion", "Claude", "Gemini", "DJI Osmo 2"],
 };
 
-function prettyAgo(iso) {
-  const mins = Math.floor((Date.now() - new Date(iso).getTime()) / 60000);
-  if (mins < 60) return `${mins} minute${mins !== 1 ? "s" : ""} ago`;
-  const h = Math.floor(mins / 60);
-  if (h < 24) return `${h} hour${h !== 1 ? "s" : ""} ago`;
-  const d = Math.floor(h / 24);
-  return `${d} day${d !== 1 ? "s" : ""} ago`;
-}
-
 function Section({ id, title, children, subtitle }) {
   return (
     <section id={id} className="max-w-6xl mx-auto px-6 py-20">
@@ -152,8 +151,6 @@ function Section({ id, title, children, subtitle }) {
 }
 
 export default function Page() {
-  const lastUpdatedText = useMemo(() => prettyAgo(SITE.lastUpdatedISO), []);
-
   return (
     <div className="min-h-screen bg-[#FFFBF4] text-[#1E3A44] antialiased selection:bg-[#E87A5D] selection:text-white font-sans">
       <header className="absolute top-0 w-full z-40 bg-transparent">
@@ -244,10 +241,15 @@ export default function Page() {
             className="relative h-[500px] w-full hidden md:block"
           >
             <div className="absolute inset-0 bg-[#DCE4D8] rounded-t-full rounded-b-[4rem] shadow-xl transform rotate-3" />
-            <div className="absolute inset-4 bg-[#F8E2E0] rounded-t-full rounded-b-[3rem] overflow-hidden flex items-center justify-center border-4 border-white transform -rotate-2 transition-transform hover:rotate-0 duration-500">
-              <span className="font-serif text-[#C49B97] text-2xl rotate-[-90deg] tracking-widest">
-                PORTRAIT
-              </span>
+            <div className="absolute inset-4 rounded-t-full rounded-b-[3rem] overflow-hidden border-4 border-white transform -rotate-2 transition-transform hover:rotate-0 duration-500">
+              <Image
+                src="/portrait.jpg"
+                alt="Vattsa Mehta"
+                fill
+                className="object-cover object-top"
+                sizes="(max-width: 768px) 100vw, 50vw"
+                priority
+              />
             </div>
             <div className="absolute -top-6 -right-6 text-[#E87A5D]">
               <Sparkles size={48} strokeWidth={1.5} />
@@ -289,11 +291,7 @@ export default function Page() {
                       <Play size={18} fill="currentColor" /> Listen on Spotify
                     </a>
                   </Button>
-                  <Button
-                    variant="outline"
-                    asChild
-                    className="border-white text-white hover:bg-white hover:text-[#1E3A44] px-8 py-5"
-                  >
+                  <Button variant="outlineOnDark" asChild className="px-8 py-5">
                     <a href={SITE.ggr.apple} target="_blank" rel="noreferrer">
                       Apple Podcasts
                     </a>
@@ -320,7 +318,7 @@ export default function Page() {
       <Section
         id="stats"
         title="The Quantified Self"
-        subtitle={`A look at the numbers. Last updated ${lastUpdatedText}.`}
+        subtitle="A look at the numbers. Live data from the past 24 hours."
       >
         <div className="grid sm:grid-cols-3 gap-6">
           <motion.div
