@@ -83,19 +83,54 @@ const SITE = {
   socials: {
     instagram: "https://www.instagram.com/thevattsanator/?hl=en",
     linkedin: "https://www.linkedin.com/in/vattsa-mehta-676620113/",
+    // Both of these must point at the PUBLISHED notion.site domain.
+    // A www.notion.so / app.notion.com URL is a private workspace link and
+    // shows visitors a login wall.
     notionJournalNav:
-      "https://www.notion.so/Life-Updates-282f015c3eff80d8afb4deca50207656",
+      "https://aquatic-production-e6b.notion.site/Life-Updates-282f015c3eff80d8afb4deca50207656",
     notionJournalLatest:
-      "https://aquatic-production-e6b.notion.site/May-1-2026-354f015c3eff8055b8aadaffda042a04?pvs=74",
+      "https://aquatic-production-e6b.notion.site/June-1-2026-373f015c3eff802b8a37ce3373d290f9",
   },
   ggr: {
     spotify: "https://open.spotify.com/show/6NZO8HHBoBON5xIXZs9xMm",
     apple: "https://podcasts.apple.com/us/podcast/gals-getting-rich/id1629224294",
   },
+  // Three counts, one per value in the hero line. Tallied by hand each month
+  // from things that already exist (journal entries, episodes, calendar/notes).
+  // Update `period` and the values together.
   stats: {
-    physical: "7,094",
-    social: "3",
-    mental: "70",
+    period: "October 2026",
+    cards: [
+      {
+        key: "exploration",
+        value: "20",
+        label: "Exploration",
+        headline: "New places this month",
+        detail:
+          "Somewhere I had never been before — a restaurant, a neighborhood, a city.",
+        theme: "bg-[#DCE4D8]",
+      },
+      {
+        key: "iteration",
+        value: "2",
+        label: "Iteration",
+        headline: "Things shipped this month",
+        detail:
+          "Podcast episodes published, journal entries written, projects pushed live.",
+        theme: "bg-[#F8E2E0]",
+      },
+      {
+        key: "connection",
+        value: "30",
+        label: "Connection",
+        headline: "Hours out in the world",
+        detail:
+          "Time spent somewhere that isn't my apartment or an office.",
+        theme: "bg-[#F2EBE0]",
+      },
+    ],
+    method:
+      "Each number is a hand count for the month. Exploration is places I had never been before. Iteration is things I actually published or finished. Connection is hours spent somewhere other than home or the office. These are counts, not a score, and they're updated monthly.",
   },
   consuming: [
     {
@@ -226,7 +261,7 @@ export default function Page() {
                     target="_blank"
                     rel="noreferrer"
                   >
-                    Read the Latest Journal
+                    Read the Journal
                   </a>
                 </Button>
                 <Button
@@ -323,96 +358,55 @@ export default function Page() {
 
       <Section
         id="stats"
-        title="The Quantified Self"
-        subtitle="A look at the numbers. Live data from the past 24 hours."
+        title="Exploration, Iteration, Connection"
+        subtitle="Three values are easy to claim. These are the numbers behind them."
       >
         <div className="grid sm:grid-cols-3 gap-6">
-          <motion.div
-            initial={{ opacity: 0, y: 15 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-          >
-            <Card className="bg-[#DCE4D8] text-[#1E3A44] h-full">
-              <CardContent className="flex flex-col justify-between h-full">
-                <span className="text-xs font-bold tracking-widest uppercase opacity-70 mb-8 block">
-                  Physical Health
-                </span>
-                <div>
-                  <div className="text-6xl font-serif mb-2">
-                    {SITE.stats.physical}
+          {SITE.stats.cards.map((card, idx) => (
+            <motion.div
+              key={card.key}
+              initial={{ opacity: 0, y: 15 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: idx * 0.1 }}
+            >
+              <Card className={`${card.theme} text-[#1E3A44] h-full`}>
+                <CardContent className="flex flex-col justify-between h-full">
+                  <span className="text-xs font-bold tracking-widest uppercase opacity-70 mb-8 block">
+                    {card.label}
+                  </span>
+                  <div>
+                    <div className="text-6xl font-serif mb-2">{card.value}</div>
+                    <p className="text-sm font-bold mb-3">{card.headline}</p>
+                    <p className="text-sm leading-relaxed opacity-70">
+                      {card.detail}
+                    </p>
                   </div>
-                  <p className="text-sm font-medium opacity-80">
-                    Steps in the past 24 hours
-                  </p>
-                </div>
-              </CardContent>
-            </Card>
-          </motion.div>
-
-          <motion.div
-            initial={{ opacity: 0, y: 15 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ delay: 0.1 }}
-          >
-            <Card className="bg-[#F8E2E0] text-[#1E3A44] h-full">
-              <CardContent className="flex flex-col justify-between h-full">
-                <span className="text-xs font-bold tracking-widest uppercase opacity-70 mb-8 block">
-                  Social Health
-                </span>
-                <div>
-                  <div className="text-6xl font-serif mb-2">
-                    {SITE.stats.social}
-                  </div>
-                  <p className="text-sm font-medium opacity-80">
-                    Unique places visited today
-                  </p>
-                </div>
-              </CardContent>
-            </Card>
-          </motion.div>
-
-          <motion.div
-            initial={{ opacity: 0, y: 15 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ delay: 0.2 }}
-          >
-            <Card className="bg-[#F2EBE0] text-[#1E3A44] h-full">
-              <CardContent className="relative flex flex-col justify-between h-full">
-                <div className="absolute top-8 right-8 z-10 group">
-                  <button
-                    type="button"
-                    className="rounded-full p-1 text-[#1E3A44]/45 hover:text-[#1E3A44] hover:bg-[#1E3A44]/5 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#E87A5D]"
-                    aria-label="Mental health score formula"
-                  >
-                    <CircleHelp size={17} strokeWidth={2} />
-                  </button>
-                  <div
-                    role="tooltip"
-                    className="absolute right-0 top-full mt-2 w-56 rounded-xl border border-[#E8E1D5] bg-white/95 px-3 py-2.5 text-xs font-medium leading-snug text-[#1E3A44] shadow-lg opacity-0 invisible translate-y-1 transition-all duration-200 pointer-events-none group-hover:opacity-100 group-hover:visible group-hover:translate-y-0 group-focus-within:opacity-100 group-focus-within:visible group-focus-within:translate-y-0"
-                  >
-                    The Formula = Mood + Stress + Energy + Sleep + Routine
-                  </div>
-                </div>
-                <span className="text-xs font-bold tracking-widest uppercase opacity-70 mb-8 block">
-                  Mental Health
-                </span>
-                <div>
-                  <div className="flex items-baseline gap-1 mb-2">
-                    <span className="text-6xl font-serif">
-                      {SITE.stats.mental}
-                    </span>
-                    <span className="text-2xl font-serif opacity-50">/100</span>
-                  </div>
-                  <p className="text-sm font-medium opacity-80">
-                    Overall score for the day
-                  </p>
-                </div>
-              </CardContent>
-            </Card>
-          </motion.div>
+                </CardContent>
+              </Card>
+            </motion.div>
+          ))}
         </div>
+
+        <motion.div
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          viewport={{ once: true }}
+          className="mt-8"
+        >
+          <details className="group rounded-3xl border border-[#E8E1D5] bg-white/60 px-7 py-5">
+          <summary className="flex cursor-pointer list-none items-center gap-2 text-sm font-bold tracking-wide text-[#1E3A44] marker:content-none hover:text-[#E87A5D] transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#E87A5D] rounded-full">
+            <CircleHelp size={16} strokeWidth={2} className="shrink-0" />
+            How these are counted
+          </summary>
+          <p className="mt-4 max-w-3xl text-sm leading-relaxed text-[#5A6D74]">
+            {SITE.stats.method}
+          </p>
+          <p className="mt-3 text-xs font-bold uppercase tracking-widest text-[#8A7963]">
+            Covering {SITE.stats.period}
+          </p>
+          </details>
+        </motion.div>
       </Section>
 
       <Section
