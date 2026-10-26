@@ -87,7 +87,7 @@ const SITE = {
     // A www.notion.so / app.notion.com URL is a private workspace link and
     // shows visitors a login wall.
     notionJournalNav:
-      "https://aquatic-production-e6b.notion.site/Life-Updates-282f015c3eff80d8afb4deca50207656",
+      "https://aquatic-production-e6b.notion.site/October-1-2026-3faf015c3eff818fb4a5ddbc95fd1edb",
     notionJournalLatest:
       "https://aquatic-production-e6b.notion.site/October-1-2026-3faf015c3eff818fb4a5ddbc95fd1edb",
   },
