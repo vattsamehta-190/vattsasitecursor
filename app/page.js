@@ -95,16 +95,15 @@ const SITE = {
     spotify: "https://open.spotify.com/show/6NZO8HHBoBON5xIXZs9xMm",
     apple: "https://podcasts.apple.com/us/podcast/gals-getting-rich/id1629224294",
   },
-  // Three numbers, one per value in the hero line (exploration, iteration,
-  // connection). Everything here is observable from the outside — no interior
-  // states, nothing self-reported. Update `period` whenever you update values.
-  // TODO(vattsa): replace the placeholder values below with real counts.
+  // Three counts, one per value in the hero line. Tallied by hand each month
+  // from things that already exist (journal entries, episodes, calendar/notes).
+  // Update `period` and the values together.
   stats: {
     period: "October 2026",
     cards: [
       {
         key: "exploration",
-        value: "6",
+        value: "20",
         label: "Exploration",
         headline: "New places this month",
         detail:
@@ -113,7 +112,7 @@ const SITE = {
       },
       {
         key: "iteration",
-        value: "14",
+        value: "2",
         label: "Iteration",
         headline: "Things shipped this month",
         detail:
@@ -122,7 +121,7 @@ const SITE = {
       },
       {
         key: "connection",
-        value: "31",
+        value: "30",
         label: "Connection",
         headline: "Hours out in the world",
         detail:
@@ -131,7 +130,7 @@ const SITE = {
       },
     ],
     method:
-      "Exploration and connection come from location history on my Apple Watch; a place counts as new the first time it appears. Iteration is a straight count of things I actually published or completed. Nothing here is self-reported, and nothing is a score — they're counts, updated monthly.",
+      "Each number is a hand count for the month. Exploration is places I had never been before. Iteration is things I actually published or finished. Connection is hours spent somewhere other than home or the office. These are counts, not a score, and they're updated monthly.",
   },
   consuming: [
     {
