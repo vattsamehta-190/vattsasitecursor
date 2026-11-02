@@ -89,7 +89,7 @@ const SITE = {
     notionJournalNav:
       "https://aquatic-production-e6b.notion.site/Life-Updates-282f015c3eff80d8afb4deca50207656",
     notionJournalLatest:
-      "https://aquatic-production-e6b.notion.site/October-1-2026-3faf015c3eff818fb4a5ddbc95fd1edb",
+      "https://aquatic-production-e6b.notion.site/November-1-2026-40cf015c3eff8123988befed86ce6fde",
   },
   ggr: {
     spotify: "https://open.spotify.com/show/6NZO8HHBoBON5xIXZs9xMm",
